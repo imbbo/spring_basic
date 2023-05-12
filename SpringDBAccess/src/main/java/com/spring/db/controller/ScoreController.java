@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.db.model.ScoreVO;
 import com.spring.db.service.IScoreService;
@@ -52,6 +53,37 @@ public class ScoreController {
 		List<ScoreVO> list = service.selectAllScores();
 		model.addAttribute("sList", list);
 		
+	}
+	
+	// 점수 개별 조회 페이지 요청 메서드
+	@GetMapping("/search")
+	public void search() {
+		System.out.println("/scroe/search: GET");
+	}
+	
+	// 점수 개별 조회 처리 메서드
+	@GetMapping("/selectOne")
+	public String selectOne(int stuId, Model model, RedirectAttributes ra) {
+		
+		ScoreVO vo = service.SelectOne(stuId);
+		
+		if(vo == null) {
+			ra.addFlashAttribute("msg", "학번 정보가 없습니다.");
+			return "redirect:/score/search";
+		} else {
+			model.addAttribute("sut", vo);
+			return "score/search-result";
+		}
+		
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int stuId, RedirectAttributes ra) {
+		System.out.println("삭제할 학번: " + stuId);
+		service.deleteScore(stuId);
+		ra.addFlashAttribute("msg", "delSuccess");
+		
+		return "redirect:/score/list";
 	}
 	
 	

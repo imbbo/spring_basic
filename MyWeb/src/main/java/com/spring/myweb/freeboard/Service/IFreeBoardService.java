@@ -1,10 +1,10 @@
-package com.spring.myweb.freeboard.mapper;
+package com.spring.myweb.freeboard.Service;
 
 import java.util.List;
 
 import com.spring.myweb.command.FreeBoardVO;
 
-public interface IFreeBoardMapper {
+public interface IFreeBoardService {
 
 	// 글 등록
 	void regist(FreeBoardVO vo);

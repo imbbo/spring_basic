@@ -1,7 +1,11 @@
 package com.spring.myweb.user.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +46,17 @@ public class UserMapperTest {
 	@Test
 	@DisplayName("존재하는 회원 아이디와 올바른 비밀번호를 입력했을 시 회원의 정보가 리턴 되어야 한다.")
 	void loginTest() {
+		String id = "abc1234";
+		String pw = "aaa2222";
 		
+//		Map으로 전달하는 방식 
+//		Map<String, String> data = new HashMap<>();
+//		data.put("id", "abc1234");
+//		data.put("pw", "aaa2222");
+		
+		
+		
+		assertNotNull(mapper.login(id, pw));
 	}
 	
 	@Test

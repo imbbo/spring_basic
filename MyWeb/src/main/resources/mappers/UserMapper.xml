@@ -19,6 +19,12 @@
 	</select>
 	
 	
+	<select id="login" resultType="user">
+		SELECT * FROM users
+		WHERE user_id = #{id} AND
+		user_pw = #{pw}
+	</select>
+	
 	
 	<select id="getInfo" resultType="user">
 		SELECT * FROM users

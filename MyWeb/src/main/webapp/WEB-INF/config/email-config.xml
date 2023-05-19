@@ -9,12 +9,12 @@
 	<property name="host" value="smtp.naver.com"/>
 	<property name="port" value="465"/>
 	<property name="username" value="${email.account}" />
-	<property name="password" value="${email.password" />
+	<property name="password" value="${email.password}" />
 	
 	<property name="javaMailProperties">
 		<props>
-				<prop key="mail.smtp.starttls.enable">true</prop>
-                <!-- <prop key="mail.smtp.ssl.enable">true</prop> -->
+				<!-- <prop key="mail.smtp.starttls.enable">true</prop> -->
+                <prop key="mail.smtp.ssl.enable">true</prop>
                 <prop key="mail.smtp.auth">true </prop>
                 <prop key="mail.transport.protocol">smtp</prop>
                 <prop key="mail.debug">true</prop>

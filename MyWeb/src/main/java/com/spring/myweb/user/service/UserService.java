@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.myweb.command.UserVO;
 import com.spring.myweb.user.mapper.IUserMapper;
+import com.spring.myweb.util.PageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +17,7 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserMapper mapper;
 	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder encoder; // 비밀번호 안호화
 	@Override
 	public int idCheck(String id) {
 		return mapper.idCheck(id);
@@ -39,13 +40,12 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserVO login(String id, String pw) {
+	public String login(String id, String pw) {
 		// id 정보를 기반으로 회원의 정보를 조회
-		UserVO vo = getInfo(id);
-		if(vo != null) {
-			String dbPw = vo.getUserPw(); // DB에서 가져온 암호화 된 비밀번호.
+		String dbPw = mapper.login(id); // DB에서 가져온 암호화 된 비밀번호.
+		if(dbPw != null) {			
 			if(encoder.matches(pw, dbPw)) { // matches 로 전 pw와 암호화 된 pw를 비교해준다
-				return vo;
+				return id;
 			}
 		}
 		
@@ -55,14 +55,16 @@ public class UserService implements IUserService {
 	
 
 	@Override
-	public UserVO getInfo(String id) {
-		return mapper.getInfo(id);
+	public UserVO getInfo(String id, PageVO vo) {
+		
+		return mapper.getInfo(id, vo);
 	}
 
 	@Override
 	public void updateUser(UserVO vo) {
-		// TODO Auto-generated method stub
 
+		
+		
 	}
 
 }

@@ -18,11 +18,12 @@ public class ReplyService implements IReplyService {
 	@Autowired
 	private IReplyMapper mapper;
 	
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
 	@Override
     public void replyRegist(ReplyVO vo) {
-        vo.setReply(encoder.encode(vo.getReplyPw()));
+        vo.setReplyPw(encoder.encode(vo.getReplyPw()));
         mapper.replyRegist(vo);
 
     }
@@ -42,22 +43,23 @@ public class ReplyService implements IReplyService {
 
 	@Override
 	public int getTotal(int bno) {
-		return 0;
+		return mapper.getTotal(bno); //이걸 리턴을 0으로 주니까 무조건 토탈이 page*5보다 적지 그니까 무조건 none 
 	}
 
 	@Override
 	public boolean pwCheck(ReplyVO vo) {
-		return false;
+		String dbPw = mapper.pwCheck(vo.getRno());
+		return encoder.matches(vo.getReplyPw(), dbPw);
 	}
 
 	@Override
 	public void update(ReplyVO vo) {
-
+		mapper.update(vo);
 	}
 
 	@Override
 	public void delete(int rno) {
-
+		mapper.delete(rno);
 	}
 
 }

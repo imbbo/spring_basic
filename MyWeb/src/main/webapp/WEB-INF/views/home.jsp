@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ include file ="include/header.jsp" %>
-    <section>
+    <section>S
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 slide-list">

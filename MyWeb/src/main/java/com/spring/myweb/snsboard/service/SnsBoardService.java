@@ -85,13 +85,12 @@ public class SnsBoardService implements ISnsBoardService {
 
 	@Override
 	public SnsBoardVO getDetail(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getDetail(bno);
 	}
 
 	@Override
 	public void delete(int bno) {
-		// TODO Auto-generated method stub
+		mapper.delete(bno);
 
 	}
 
